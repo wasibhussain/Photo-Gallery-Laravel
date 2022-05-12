@@ -15,49 +15,51 @@ class PhotosController extends Controller
 
     public function store(Request $request)
     {
-       
-     $request->validate([
+
+        $request->validate([
 
             'title' => 'required',
             'description' => 'required',
             'photo' => 'required|image',
-       
+
         ]);
-       // dd($request);
+        // dd($request);
 
-       //file name with original extension
-       $filenameWithExtension = $request->file('photo')->getClientOriginalName();
+        //file name with original extension
+        $filenameWithExtension = $request->file('photo')->getClientOriginalName();
 
-       $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+        $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
 
-       $extension = $request->file('photo')->getClientOriginalExtension();
+        $extension = $request->file('photo')->getClientOriginalExtension();
 
-       $filenameToStore = $filename . '_' . time() . '.' . $extension;
+        $filenameToStore = $filename . '_' . time() . '.' . $extension;
 
-       //Saving image to server disc
-       $request->file('photo')->storeAs('public/albums/'. $request->input('album_id') , $filenameToStore);
-       $photo = new Photo();
-       $photo->title = $request->input('title');
-       $photo->description = $request->input('description');
-       $photo->photo = $filenameToStore;
-       $photo->size = $request->file('photo')->getSize();
-       $photo->album_id = $request->input('album_id');
-    //    dd($photo);
-       $photo->save();
-      
+        //Saving image to server disc
+        $request->file('photo')->storeAs('public/albums/' . $request->input('album_id'), $filenameToStore);
+        $photo = new Photo();
+        $photo->title = $request->input('title');
+        $photo->description = $request->input('description');
+        $photo->photo = $filenameToStore;
+        $photo->size = $request->file('photo')->getSize();
+        $photo->album_id = $request->input('album_id');
+        //    dd($photo);
+        $photo->save();
 
-       return redirect('show/' . $request->input('album_id'))->with('success!', 'Image Uploaded successfully!');
+
+        return redirect('show/' . $request->input('album_id'))->with('success!', 'Image Uploaded successfully!');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         // dd($id);
         $album = Album::find($id);
-        return view('layouts.show')->with('album' , $album);
-
+        return view('layouts.show')->with('album', $album);
     }
 
-    public function showphoto($id){
-        $photo = Photo::findorFail($id);
-        return view('layouts.photos.viewphoto' , $photo->id);
+    public function showphoto($id)
+    {
+        $photo = Photo::find($id);
+        // dd($photo->title);
+        return view('layouts.photos.viewphoto')->with('photo', $photo);
     }
 }

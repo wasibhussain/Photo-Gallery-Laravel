@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<div class="container">
     <h2>Create New Album</h2>
     
     <form method="POST" action="/album_store" enctype="multipart/form-data">
@@ -26,4 +26,5 @@
       
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+    </div>
 @endsection

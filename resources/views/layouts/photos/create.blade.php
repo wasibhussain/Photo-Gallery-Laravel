@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="container">
     <h2>Upload Pictures</h2>
 
     <form method="POST" action="{{ route('photos-store') }}" enctype="multipart/form-data">
@@ -23,4 +25,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
 @endsection

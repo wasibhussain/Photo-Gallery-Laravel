@@ -24,7 +24,7 @@
             <p class="card-text">{{$photo->description}}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="#" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="{{route('show-photo', $photo->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
               </div>
               <small class="text-muted">{{$photo->size}}</small>
             </div>

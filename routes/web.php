@@ -29,4 +29,4 @@ Route::get('show/{id}', 'App\Http\Controllers\PhotosController@show')->name('pho
 
 Route::get('/showphoto/{id}','App\Http\Controllers\PhotosController@showphoto')->name('show-photo');
 
-Route::delete('photo/{id}', 'App\Http\Controllers\PhotosController@destroy');
+Route::delete('photo/{id}', 'App\Http\Controllers\PhotosController@destroy')->name('photo-destroy');
